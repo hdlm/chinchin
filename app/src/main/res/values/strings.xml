@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ChinChinApp</string>
+    <string name="title_main">ChinChin</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_exchange">Intercambio</string>
+    <string name="title_qr">QR</string>
+    <string name="title_logout">Salir</string>
+</resources>
