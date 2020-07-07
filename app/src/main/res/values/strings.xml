@@ -8,4 +8,11 @@
     <string name="title_exchange">Intercambio</string>
     <string name="title_qr">QR</string>
     <string name="title_logout">Salir</string>
+
+    <string name="exchange_fragment_title">Intercambio</string>
+    <string name="exchange_fragment_monto_hint">Ingrese el monto a convertir</string>
+    <string name="exchange_fragment_convert_button">Convertir</string>
+    <string name="exchange_fragment_resultado_textview_no_value">Sin valor</string>
+    <string name="valor_tasa">valor de la tasa de cambio</string>
+
 </resources>
