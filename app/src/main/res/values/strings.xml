@@ -11,8 +11,18 @@
 
     <string name="exchange_fragment_title">Intercambio</string>
     <string name="exchange_fragment_monto_hint">Ingrese el monto a convertir</string>
+    <string name="exchange_fragment_label_divisa">Tipo de divisa:</string>
     <string name="exchange_fragment_convert_button">Convertir</string>
     <string name="exchange_fragment_resultado_textview_no_value">Sin valor</string>
     <string name="valor_tasa">valor de la tasa de cambio</string>
+
+    <string-array name="divisas_array">
+        <item>USD</item>
+        <item>ETH</item>
+        <item>BTC</item>
+        <item>PTR</item>
+        <item>BS</item>
+        <item>EURO</item>
+    </string-array>
 
 </resources>
