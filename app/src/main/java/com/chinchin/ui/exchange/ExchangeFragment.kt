@@ -1,18 +1,21 @@
 package com.chinchin.ui.exchange
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.chinchin.MainActivity
 import com.chinchin.R
 import kotlinx.android.synthetic.main.fragment_exchange.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class ExchangeFragment : Fragment() {
 
@@ -24,13 +27,6 @@ class ExchangeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        //viewModel =
-        //        ViewModelProvider(this).get(ExchangeViewModel::class.java)
-        //val root = inflater.inflate(R.layout.fragment_exchange, container, false)
-        //val textView: TextView = root.findViewById(R.id.tasaTextView)
-        //viewModel.text.observe(viewLifecycleOwner, Observer {
-        //    textView.text = it
-        //})
         return inflater.inflate(R.layout.fragment_exchange, container, false)
     }
 
@@ -42,7 +38,8 @@ class ExchangeFragment : Fragment() {
         resultadoTextView.text = getString(R.string.exchange_fragment_resultado_textview_no_value)
 
         val resultadoObserver = Observer<Double> { result ->
-            resultadoTextView.text = result.toString()
+            val formatter: DecimalFormat = DecimalFormat("#,##0.00")
+            resultadoTextView.text = formatter.format(result)
         }
         viewModel.getResultado().observe(viewLifecycleOwner, resultadoObserver)
 
@@ -55,15 +52,21 @@ class ExchangeFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             divisaSpinner.adapter = adapter
         }
+
+        viewModel.setRate("usd")
         divisaSpinner.setSelection(0)  // seleccion por default
         divisaSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected( parent: AdapterView<*>?, view: View?, position: Int, id: Long ) {
+                var tipoDivisa = divisaSpinner.selectedItem.toString()
+                viewModel.setRate(tipoDivisa)
+                Log.d(MainActivity.TAG, "ExchangeFragment -> divisaSpinner change to: ${tipoDivisa}")
+            }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // do nothing
             }
 
-            override fun onItemSelected( parent: AdapterView<*>?, view: View?, position: Int, id: Long ) {
-                //TODO consultar el endpoint para obtener el valor correspondiente a la divisa seleccionada
-            }
         }
 
         convertButton.setOnClickListener {
@@ -73,6 +76,7 @@ class ExchangeFragment : Fragment() {
                 resultadoTextView.text = getString(R.string.exchange_fragment_resultado_textview_no_value)
             }
         }
+
     }
 
     companion object {

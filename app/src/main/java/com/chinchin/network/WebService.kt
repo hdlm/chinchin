@@ -7,6 +7,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.chinchin.MainActivity
 import com.chinchin.model.Divisa
 
 class WebService {
@@ -27,8 +28,8 @@ class WebService {
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             Response.Listener { response ->
-                //Log.d("mychinchin", "Response is: ${response.toString().substring(0,500)}")
-                var divisas: MutableList<Divisa> = ArrayList<Divisa>()
+                Log.d(MainActivity.TAG, "WebService -> getAll(), response is: ${response.toString().substring(0,500)}")
+                val divisa = Divisa.getInstance()
 
                 val data = response.getJSONArray("data")
                 for(idx in 0..data.length()-1) {
@@ -37,13 +38,13 @@ class WebService {
                     var b = dataObj.getString("b")
                     var q = dataObj.getString("q")
                     var i = dataObj.getString("i")
-                    divisas.add(Divisa(b, q, i))
+                    divisa.add(b, q, i)
                 }
-                callback.data(divisas)
+                callback.done(divisa)
 
             },
             Response.ErrorListener { error ->
-                Log.d("mychinchin", "Response is: ${error.message}")
+                Log.d(MainActivity.TAG, "WebService -> Response is: ${error.message}")
             })
 
         queue.add(jsonObjectRequest)
@@ -52,7 +53,7 @@ class WebService {
 
 
     interface ICallback {
-        fun data(divisas: List<Divisa>): Unit
+        fun done(divisa:Divisa): Unit
     }
 
 

@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.exchange.ExchangeFragment">
 
+    <TextView
+        android:id="@+id/labelDivisaOrigen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exchange_fragment_label_divisa_origen"
+        android:ems="10"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center" />
 
     <EditText
         android:id="@+id/montoText"
@@ -20,7 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center" />
 
     <LinearLayout
         android:id="@+id/exchangeLinearLayout"
@@ -28,6 +43,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="64dp"
+        android:ems="10"
         android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,9 +74,10 @@
 
     <TextView
         android:id="@+id/resultadoTextView"
+        android:textSize="32sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tasaTextView" />

@@ -11,6 +11,7 @@
 
     <string name="exchange_fragment_title">Intercambio</string>
     <string name="exchange_fragment_monto_hint">Ingrese el monto a convertir</string>
+    <string name="exchange_fragment_label_divisa_origen">PTR:</string>
     <string name="exchange_fragment_label_divisa">Tipo de divisa:</string>
     <string name="exchange_fragment_convert_button">Convertir</string>
     <string name="exchange_fragment_resultado_textview_no_value">Sin valor</string>
