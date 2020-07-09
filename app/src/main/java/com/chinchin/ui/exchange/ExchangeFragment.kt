@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -15,7 +14,6 @@ import com.chinchin.MainActivity
 import com.chinchin.R
 import kotlinx.android.synthetic.main.fragment_exchange.*
 import java.text.DecimalFormat
-import java.text.NumberFormat
 
 class ExchangeFragment : Fragment() {
 
@@ -73,6 +71,10 @@ class ExchangeFragment : Fragment() {
         convertButton.setOnClickListener {
             if (montoText.text.isNotEmpty()) {
                 viewModel.setMonto(montoText.text.toString())
+                val alert: QrPrintDialog = QrPrintDialog()
+                val valor : String = divisaSpinner.selectedItem.toString() + ":" + montoText.text.toString()
+                alert.showDialog(requireContext(), valor)
+
             } else {
                 resultadoTextView.text = getString(R.string.exchange_fragment_resultado_textview_no_value)
             }
