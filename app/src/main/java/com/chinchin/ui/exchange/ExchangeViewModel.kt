@@ -15,13 +15,16 @@ class ExchangeViewModel : ViewModel() {
     private var result: MutableLiveData<Double> = MutableLiveData()
     private var monto = 0.0
     private var tipoRate = "usd"
-    private var valorRate = 205000.0
+    private var valorRate = MutableLiveData<Double>().apply {
+        value = 60000.0
+    }
 
 
     fun setMonto(monto: String):Unit {
         this.monto = monto.toDouble()
-        result.value = monto.toDouble() * valorRate
+        result.value = monto.toDouble() * valorRate.value!!
     }
+
 
     /**
      * La funcion cambia el rate correspondiente al tipo de divisa especificado
@@ -34,15 +37,19 @@ class ExchangeViewModel : ViewModel() {
 
         val rate = Divisa.getInstance().getRate(tipoDivisa)
         rate ?.let {
-            valorRate = rate
+            valorRate.value = rate
         } ?: run {
-            valorRate = 0.0
+            valorRate.value = 0.0
         }
 
     }
 
     fun getResultado(): MutableLiveData<Double> {
         return result
+    }
+
+    fun getRate(): MutableLiveData<Double> {
+        return valorRate
     }
 
 }

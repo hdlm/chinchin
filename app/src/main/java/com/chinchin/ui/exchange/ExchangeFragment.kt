@@ -40,7 +40,13 @@ class ExchangeFragment : Fragment() {
             val formatter: DecimalFormat = DecimalFormat("#,##0.00")
             resultadoTextView.text = formatter.format(result)
         }
+        val rateObserver = Observer<Double> { result ->
+            val formatter: DecimalFormat = DecimalFormat("#,##0.00")
+            tasaTextView.text = formatter.format(result)
+
+        }
         viewModel.getResultado().observe(viewLifecycleOwner, resultadoObserver)
+        viewModel.getRate().observe(viewLifecycleOwner, rateObserver)
 
         // Setting Adapter to Spinners
         ArrayAdapter.createFromResource(
@@ -72,8 +78,8 @@ class ExchangeFragment : Fragment() {
             if (montoText.text.isNotEmpty()) {
                 viewModel.setMonto(montoText.text.toString())
                 val alert: QrPrintDialog = QrPrintDialog()
-                val valor : String = divisaSpinner.selectedItem.toString() + ":" + montoText.text.toString()
-                alert.showDialog(requireContext(), valor)
+                val msg = alert.prepareMessage("PTR",  divisaSpinner.selectedItem.toString(), montoText.text.toString())
+                alert.showDialog(requireContext(), msg)
 
             } else {
                 resultadoTextView.text = getString(R.string.exchange_fragment_resultado_textview_no_value)

@@ -32,11 +32,11 @@ class QrPrintDialog {
     }
 
     /**
-     * La funcion genera el codigo QR con la cadena de texto recibida
-     * @param msg cadena de texto a codificar
-     * @param barcodeImageView  referencia al imageView donde colocar el QR
+     * El metodo se encarga de generar el codigo QR con la cadena de texto recibida
+     * @param msg cadena de texto con el que se generara el codigo QR
+     * @return nada, pero muestra el la imagen del QR en pantalla
      */
-    private fun generateBarcode(msg:String, barcodeImageView:ImageView):Unit {
+    private fun generateBarcode(msg:String, barcodeImageView: ImageView):Unit {
         try {
             val encoder = BarcodeEncoder()
             val bitmap = encoder.encodeBitmap(msg, BarcodeFormat.QR_CODE, 500,500)
@@ -45,6 +45,19 @@ class QrPrintDialog {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+    }
+
+    /**
+     * El metodo prepara la cadena de texto que se utilizara para elaborar el QR
+     * @param fiatOrig FIAT de origen
+     * @param fiatDest FIAT a convertir
+     * @param monto  a convertir
+     */
+    fun prepareMessage(fiatOrig: String, fiatDest: String, monto: String ):String {
+        val msg = "FIAT_ORG:" + fiatOrig + ";FIAT_DST:" + fiatDest + ";MONTO:" + monto + ";;"
+        return msg
+
     }
 
 }
