@@ -33,7 +33,8 @@ class ExchangeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(ExchangeViewModel::class.java)
+
+        Log.d(MainActivity.TAG, "view created: " + this.javaClass.simpleName )
 
         resultadoTextView.text = getString(R.string.exchange_fragment_resultado_textview_no_value)
 

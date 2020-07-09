@@ -31,9 +31,13 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_logout -> {
+                //
+                // SHOW DIALOG
+                //
+                var dialogFragment: DialogFragment = LogoutFragment.newInstance()
+                val fm = supportFragmentManager
+                dialogFragment.show(fm.beginTransaction(), "dialog")
 
-                //TODO aqui va el logout
-                replaceFragment(LogoutFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         val url = "https://www.binance.com/exchange-api/v1/public/asset-service/product/get-products"
 
+        //PENDING deshabilitado el llamado al webservice hasta tener claro como procesar el valor de la divisa a elegir
 //        val ws = WebService.newInstance(this)
 //        ws.getAll(object: WebService.ICallback {
 //            override fun done(divisa: Divisa) {
